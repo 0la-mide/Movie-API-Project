@@ -2,17 +2,28 @@
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 :root {
-    --primary-color: #22254b;
-    --secondary-color: #373b69;
+    --primary-color: #1f1f1f; /* Dark background */
+    --secondary-color: #333; /* Slightly lighter for contrast */
+    --highlight-color: #ffcc00; /* Bright color for highlights */
+    --text-color-light: #f5f5f5; /* Light text color */
+    --text-color-dark: #1f1f1f; /* Dark text color */
+    --button-bg: #ff9800; /* Button background color */
+    --button-hover-bg: #e68900; /* Button hover background color */
+    --placeholder-color: #aaaaaa; /* Placeholder text color */
+    --shadow-color: rgba(0, 0, 0, 0.15); /* Shadow color */
 }
 
 body {
     background-color: var(--primary-color);
+    color: var(--text-color-light);
     font-family: 'Poppins', sans-serif;
     margin: 0;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 header {
@@ -20,65 +31,76 @@ header {
     display: flex;
     justify-content: flex-end;
     background-color: var(--secondary-color);
+    box-shadow: 0 2px 4px var(--shadow-color);
 }
 
 .search {
-    background-color: transparent;
-    border: 2px solid var(--primary-color);
+    background-color: var(--secondary-color);
+    border: 2px solid var(--highlight-color);
     padding: 0.5rem 1rem;
-    border-radius: 50px;
+    border-radius: 25px;
     font-size: 1rem;
-    color: #fff;
-    font-family: inherit;
+    color: var(--text-color-light);
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .search:focus {
     outline: 0;
     background-color: var(--primary-color);
+    color: var(--highlight-color);
 }
 
 .search::placeholder {
-    color: #7378c5;
+    color: var(--placeholder-color);
 }
 
 main {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    padding: 2rem;
 }
 
 .movie {
     width: 300px;
     margin: 1rem;
-    border-radius: 3px;
-    box-shadow: 0.2px 4px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px var(--shadow-color);
     background-color: var(--secondary-color);
     position: relative;
     overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.movie:hover {
+    transform: scale(1.05);
 }
 
 .movie img {
     width: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 .movie-info {
-    color: #eee;
+    padding: 1rem;
+    color: var(--text-color-light);
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 0.5rem 1rem 1rem;
-    letter-spacing: 0.5px;
+    align-items: center;
 }
 
 .movie-info h3 {
-    margin-top: 0;
+    margin: 0;
+    font-size: 1.2rem;
 }
 
 .movie-info span {
-    background-color: var(--primary-color);
+    background-color: var(--highlight-color);
     padding: 0.25rem 0.5rem;
     border-radius: 3px;
     font-weight: bold;
+    color: var(--text-color-dark);
 }
 
 .movie-info span.green {
@@ -98,15 +120,16 @@ main {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #fff;
+    background-color: var(--text-color-light);
+    color: var(--text-color-dark);
     padding: 1rem;
     max-height: 100%;
-    transform: translateY(101%);
-    transition: transform 0.3s ease-in;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
 }
 
 .movie:hover .overview {
-    transform: translateY(0)
+    transform: translateY(0);
 }
 
 #tags {
@@ -114,18 +137,21 @@ main {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
-    margin: 10px auto;
+    margin: 2rem auto;
 }
 
 .tag {
-    color: white;
-    padding: 10px 20px;
-    background-color: orange;
-    border-radius: 50px;
-    margin: 5px;
-    display: inline-block;
+    color: var(--text-color-light);
+    padding: 0.5rem 1rem;
+    background-color: var(--button-bg);
+    border-radius: 25px;
+    margin: 0.5rem;
     cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.tag:hover {
+    background-color: var(--button-hover-bg);
 }
 
 .tag.highlight {
@@ -133,20 +159,28 @@ main {
 }
 
 .no-results {
-    color: white;
+    color: var(--text-color-light);
+    text-align: center;
+    margin-top: 2rem;
 }
 
 .pagination {
     display: flex;
-    margin: 10px 30px;
-    align-items: center;
     justify-content: center;
-    color: white;
+    align-items: center;
+    margin: 2rem 0;
+    color: var(--text-color-light);
 }
 
 .page {
-    padding: 20px;
+    padding: 1rem 2rem;
     cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.page:hover {
+    background-color: var(--button-bg);
+    color: var(--text-color-dark);
 }
 
 .page.disabled {
@@ -155,22 +189,28 @@ main {
 }
 
 .current {
-    padding: 10px 20px;
-    border-radius: 50%;
-    border: 5px solid orange;
-    font-size: 20px;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    border: 2px solid var(--highlight-color);
+    font-size: 1.2rem;
     font-weight: 600;
 }
 
 .know-more {
-    background-color: orange;
-    color: white;
-    font-size: 16px;
+    background-color: var(--button-bg);
+    color: var(--text-color-light);
+    font-size: 1rem;
     font-weight: bold;
     border: 0;
-    border-radius: 50px;
-    padding: 10px 20px;
-    margin-top: 5px;
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.know-more:hover {
+    background-color: var(--button-hover-bg);
+    color: var(--text-color-dark);
 }
 
 /* The Overlay (background) */
@@ -183,13 +223,13 @@ main {
     top: 0;
     background-color: rgba(0, 0, 0, 0.9);
     overflow-x: hidden;
-    transition: 0.5s;
+    transition: width 0.5s;
 }
 
 /* Position the content inside the overlay */
 .overlay-content {
     position: relative;
-    top: 10%;
+    top: 25%;
     width: 100%;
     text-align: center;
     margin-top: 30px;
@@ -199,10 +239,10 @@ main {
 .overlay a {
     padding: 8px;
     text-decoration: none;
-    font-size: 36px;
+    font-size: 2rem;
     color: #818181;
     display: block;
-    transition: 0.3s;
+    transition: color 0.3s;
 }
 
 /* When you mouse over the navigation links, change their color */
@@ -216,17 +256,17 @@ main {
     position: absolute;
     top: 20px;
     right: 45px;
-    font-size: 60px;
+    font-size: 3rem;
 }
 
 /* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap */
 @media screen and (max-height: 450px) {
     .overlay a {
-        font-size: 20px
+        font-size: 1.5rem;
     }
 
     .overlay .closebtn {
-        font-size: 40px;
+        font-size: 2rem;
         top: 15px;
         right: 35px;
     }
@@ -242,7 +282,10 @@ main {
 
 .arrow {
     position: absolute;
-    font-size: 40px;
+    font-size: 2.5rem;
+    color: var(--text-color-light);
+    cursor: pointer;
+    transition: color 0.3s;
 }
 
 .arrow.left-arrow {
@@ -257,22 +300,30 @@ main {
     right: 5%;
 }
 
+.arrow:hover {
+    color: var(--highlight-color);
+}
+
 .dots {
-    margin-top: 30px;
+    margin-top: 2rem;
+    text-align: center;
 }
 
 .dots .dot {
-    padding: 5px 15px;
+    padding: 0.5rem;
     border-radius: 50%;
-    border: 5px solid var(--secondary-color);
-    color: white;
-    font-size: 20px;
+    border: 2px solid var(--secondary-color);
+    color: var(--text-color-light);
+    font-size: 1rem;
     font-weight: 600;
-    margin: 5px;
+    margin: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .dots .dot.active {
-    border-color: orange;
+    background-color: var(--highlight-color);
+    color: var(--text-color-dark);
 }
 
 /* Responsive Styles */
@@ -293,11 +344,11 @@ main {
     }
 
     .movie-info h3 {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 
     .movie-info span {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
 
     .overview {
@@ -309,18 +360,18 @@ main {
     }
 
     .page {
-        padding: 10px;
-        margin: 5px 0;
+        padding: 0.5rem;
+        margin: 0.5rem 0;
     }
 
     .current {
-        padding: 5px 10px;
-        font-size: 16px;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
     }
 
     .know-more {
-        font-size: 14px;
-        padding: 5px 10px;
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
     }
 }
 
@@ -331,25 +382,25 @@ main {
     }
 
     .movie-info h3 {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
 
     .movie-info span {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
         padding: 0.2rem 0.4rem;
     }
 
     .pagination {
-        margin: 10px;
+        margin: 0.5rem;
     }
 
     .page {
-        padding: 8px;
-        font-size: 14px;
+        padding: 0.5rem;
+        font-size: 0.8rem;
     }
 
     .current {
-        padding: 5px 10px;
-        font-size: 14px;
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
     }
 }
